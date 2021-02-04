@@ -17,7 +17,7 @@ mongoose.connect(uri,
 
 
 //import routes
-
+const indexRoutes = require('./routes/index')
 
 
 //settings
@@ -26,8 +26,11 @@ app.set('port', process.env.PORT || 3000)
 
 //middleware
 app.use(morgan('dev'))
+app.use(express.urlencoded({extended: false}))
 
 //routes
+app.use('/', indexRoutes)
+
 
 //starting the sever
 app.listen(app.get('port'), () => {
