@@ -1,8 +1,12 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const GenderSchema = new Schema ({
+const genderSchema = new Schema ({
+    gender_id: Schema.Types.ObjectId,
     name: String
-})
+},
+{ collection: "gender" }
+);
 
-module.exports = mongoose.model('gender', GenderSchema)
+const Gender = mongoose.model('gender', genderSchema);
+module.exports = Gender;
