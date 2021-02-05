@@ -1,13 +1,9 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-Alignment = require('./alignment.js'),
-AlignmentSchema = mongoose.model('Alignment').schema
-Gender = require('./gender.js'),
-GenderSchema = mongoose.model('Gender').schema
-Publisher = require('./publisher.js'),
-PublisherSchema = mongoose.model('Publisher').schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const mongoosePaingate = require('mongoose-paginate-v2')
 
-const HeroSchema = new Schema({
+const heroSchema = new Schema({
+    hero_id: Number, //hacer autoincremental
     name: String,
     eye_color: String,
     hair_color: String,
@@ -15,9 +11,23 @@ const HeroSchema = new Schema({
     height: Number,
     weight: Number,
     race: String,
-    publisher_id: [PublisherSchema],
-    gender_id: [GenderSchema],
-    alignment_id: [AlignmentSchema]
-})
+    publisher_id: {
+        type: Number,
+        ref: 'publisher'
+    },
+    gender_id: {
+        type: Number,
+        ref: 'gender'
+    },
+    alignment_id: {
+        type: Number,
+        ref: 'alignment'
+    }
+},
+{ collection: "hero_information" }
+);
 
-module.exports = mongoose.model('hero_information', HeroSchema)
+heroSchema.plugin(mongoosePaingate)
+
+const Hero = mongoose.model('hero', heroSchema);
+module.exports = Hero;
