@@ -23,8 +23,7 @@ module.exports = {
     getHero: async (req, res, next) => {
         try {
             const { heroId } = req.params;
-            // const hero = await Hero.findOne({hero_id: heroId});
-            const hero = await Hero.findById(heroId).populate({path: 'publisher_id', model: Publisher, select: 'publisher_name -_id'})
+            const hero = await Hero.findById(heroId)
             res.status(200).json(hero)    
         } catch (error) {
             console.log(error)
@@ -33,7 +32,9 @@ module.exports = {
 
     postHero: async (req, res, next) => {
         try {
+            const lastHero = await Hero.findOne().sort({$natural: -1})
             const newHero = new Hero(req.body)
+            newHero.hero_id = lastHero.hero_id + 1
             const hero = await newHero.save()
             res.status(201).json(hero)
         } catch (error) {
@@ -44,8 +45,8 @@ module.exports = {
     updateHero: async (req, res, next) => {
         try {
             const { heroId } = req.params
-            const hero = await Hero.findByIdAndUpdate(heroId, req.body)
-            res.send('Actualizado')
+            const hero = await Hero.findByIdAndUpdate(heroId, req.body, {new: true})
+            res.status(201).json(hero)
         } catch (error) {
             console.log(error)
         }
