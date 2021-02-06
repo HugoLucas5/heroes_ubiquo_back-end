@@ -1,5 +1,4 @@
-const Hero = require('../models/hero');
-const Alignment = require('../models/alignment')
+const Hero = require('../models/hero')
 
 module.exports = {
     // list all heroes, filters added
