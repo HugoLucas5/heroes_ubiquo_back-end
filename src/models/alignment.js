@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
-const { schema } = require('./hero')
 const Schema = mongoose.Schema
 
-const AlignmentSchema = new Schema ({
-    alignment_id: Schema.Types.ObjectId,
+const alignmentSchema = new Schema ({
+    alignment_id: Number,
     name: String
 },
 { collection: "alignment" }
-)
+);
 
-module.exports = mongoose.model('alignment', AlignmentSchema)
+const Alignment = mongoose.model('alignment', alignmentSchema)
+module.exports = Alignment;
