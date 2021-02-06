@@ -1,12 +1,11 @@
 const Hero = require('../models/hero');
-const Publisher = require('../models/publisher');
-const Gender = require('../models/gender');
-const Alignment = require('../models/alignment');
+const Alignment = require('../models/alignment')
 
 module.exports = {
+    // list all heroes, filters added
     getHeroes: async (req, res, next) => {
         try {
-            const options = {}
+            const options = {} //options object for filters
             req.query.race ? options.race = req.query.race : null
             req.query.publisher ? options.publisher_id = req.query.publisher : null
             req.query.gender ? options.gender_id = req.query.gender : null
@@ -20,6 +19,7 @@ module.exports = {
         }
     },
 
+    // getting singular hero
     getHero: async (req, res, next) => {
         try {
             const { heroId } = req.params;
@@ -30,11 +30,12 @@ module.exports = {
         }
     },
 
+    // creatin a new hero
     postHero: async (req, res, next) => {
         try {
-            const lastHero = await Hero.findOne().sort({$natural: -1})
+            const lastHero = await Hero.findOne().sort({$natural: -1}) // getting the last hero saved
             const newHero = new Hero(req.body)
-            newHero.hero_id = lastHero.hero_id + 1
+            newHero.hero_id = lastHero.hero_id + 1 // incrementing the hero_id from the last hero to the new hero
             const hero = await newHero.save()
             res.status(201).json(hero)
         } catch (error) {
@@ -42,24 +43,25 @@ module.exports = {
         }
     },
 
+    // update a hero
     updateHero: async (req, res, next) => {
         try {
             const { heroId } = req.params
-            const hero = await Hero.findByIdAndUpdate(heroId, req.body, {new: true})
+            const hero = await Hero.findByIdAndUpdate(heroId, req.body, {new: true}) //  new: true for give back the updated hero
             res.status(201).json(hero)
         } catch (error) {
             console.log(error)
         }
     },
 
+    // deleting hero
     deleteHero: async (req, res, next) => {
         try {
             const { heroId } = req.params
-            await Hero.deleteOne({_id: heroId})
+            await Hero.findByIdAndDelete({_id: heroId})
             res.send('Eliminado')
         } catch (error) {
             console.log(error)
         }
-
     }
 };

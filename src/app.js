@@ -16,7 +16,10 @@ mongoose.connect(uri,
   .catch(e => console.log(e))
 
 //import routes
-const indexRoutes = require('./routes/index');
+const genderRoutes = require('./routes/genderRoutes')
+const publisherRoutes = require('./routes/publisherRoutes')
+const alignmentRoutes = require('./routes/alignmentRoutes');
+const heroRoutes = require('./routes/heroesRouters');
 
 
 //settings
@@ -29,7 +32,10 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 //routes
-app.use('/', indexRoutes);
+app.use(genderRoutes)
+app.use(publisherRoutes)
+app.use(alignmentRoutes)
+app.use(heroRoutes)
 
 
 //starting the sever

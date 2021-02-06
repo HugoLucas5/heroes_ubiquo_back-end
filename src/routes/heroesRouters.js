@@ -1,8 +1,6 @@
-const express = require('express');
-const { deleteHero } = require('../controllers/heroesController');
-//const router = express.Router();
 const router = require('express-promise-router')()
 const HeroesController = require('../controllers/heroesController')
+const AlignmentsController = require('../controllers/alignmentsController')
 
 router.route('/')
     .get(HeroesController.getHeroes)
