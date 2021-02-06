@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mongoosePaingate = require('mongoose-paginate-v2')
 
+//creating the hero model and asigning their collection
 const heroSchema = new Schema({
     hero_id: Number,
     name: String,

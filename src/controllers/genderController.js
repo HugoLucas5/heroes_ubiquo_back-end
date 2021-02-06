@@ -1,8 +1,7 @@
 const Gender = require('../models/gender')
-const Gemder = require('../models/gender')
 
 module.exports = {
-    // list all publishers
+    // list all genders
     getGenders: async (req, res, next) => {
         try {
             const genders = await Gender.find()

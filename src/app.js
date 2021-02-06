@@ -1,6 +1,6 @@
 const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
+const morgan = require('morgan'); //morgan for watch the request
+const mongoose = require('mongoose'); // for easy mongo's handling
 const app = express();
 
 //db connection
