@@ -7,6 +7,7 @@ module.exports = {
         try {
             const options = {} //options object for filters
             
+            req.query.name ? options.name = req.query.name : null 
             req.query.race ? options.race = req.query.race : null
             req.query.publisher ? options.publisher_id = Number(req.query.publisher) : null
             req.query.gender ? options.gender_id = Number(req.query.gender) : null
