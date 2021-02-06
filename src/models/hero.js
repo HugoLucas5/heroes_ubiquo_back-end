@@ -28,7 +28,7 @@ const heroSchema = new Schema({
         required: true
     }
 },
-{ collection: "hero_information" }
+{ collection: "hero_information" },
 );
 
 heroSchema.plugin(aggregatePaginate)
