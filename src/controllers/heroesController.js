@@ -46,7 +46,7 @@ module.exports = {
             ])
             // pagination options
             const pagination = {
-                limit: 15,
+                limit: 10,
                 page: req.query.page || 1
             }
             const heroes = await Hero.aggregatePaginate(myAggregate, pagination)
