@@ -60,8 +60,39 @@ module.exports = {
     // getting singular hero
     getHero: async (req, res, next) => {
         try {
-            const { heroId } = req.params;
-            const hero = await Hero.findById(heroId)
+            const { heroId }  = req.params
+            const myAggregate = Hero.aggregate([
+                //lookup for inner fields
+                {
+                    $lookup: {
+                        from: "publisher",
+                        localField: "publisher_id",
+                        foreignField: "publisher_id",
+                        as: "publisher"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "gender",
+                        localField: "gender_id",
+                        foreignField: "gender_id",
+                        as: "gender"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "alignment",
+                        localField: "alignment_id",
+                        foreignField: "alignment_id",
+                        as: "alignment"
+                    }
+                },
+                {
+                    //matching the filtes
+                    $match: { _id: new mongoose.Types.ObjectId(heroId) }
+                },
+            ])
+            const hero = await Hero.aggregatePaginate(myAggregate)
             res.status(200).json(hero)    
         } catch (errors) {
             console.log(errors)
