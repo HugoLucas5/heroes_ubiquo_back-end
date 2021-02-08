@@ -7,8 +7,8 @@ module.exports = {
         try {
             const options = {} //options object for filters
             
-            req.query.name ? options.name = new RegExp(req.query.name, 'i')  : null 
-            req.query.race ? options.race = new RegExp(req.query.race, 'i') : null
+            req.query.name ? options.name = new RegExp(req.query.name, 'i')  : null // regex for name param
+            req.query.race ? options.race = new RegExp(req.query.race, 'i') : null // regex for race param
             req.query.publisher ? options.publisher_id = Number(req.query.publisher) : null
             req.query.gender ? options.gender_id = Number(req.query.gender) : null
             req.query.alignment ? options.alignment_id = Number(req.query.alignment) : null
