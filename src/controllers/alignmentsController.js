@@ -1,4 +1,4 @@
-const Alignment = require('../models/alignment')
+const { Alignment } = require('../models');
 
 module.exports = {
     // list all alignments

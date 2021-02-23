@@ -1,4 +1,4 @@
-const Publisher = require('../models/publisher')
+const { Publisher } = require('../models');
 
 module.exports = {
     // list all publishers
