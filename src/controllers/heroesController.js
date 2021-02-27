@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Hero = require('../models/hero')
+const { Hero } = require('../models');
 
 module.exports = {
     // list all heroes, filters added
@@ -129,8 +129,8 @@ module.exports = {
     // deleting hero
     deleteHero: async (req, res, next) => {
         try {
-            const { heroId } = req.params
-            await Hero.findByIdAndDelete({_id: heroId})
+            const { heroId: _id } = req.params
+            await Hero.findByIdAndDelete({ _id })
             res.send('Eliminado')
         } catch (errors) {
             console.log(errors)
